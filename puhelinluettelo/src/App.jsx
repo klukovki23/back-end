@@ -101,20 +101,14 @@ const App = () => {
             setNewNumber("");
           })
           .catch((error) => {
-            if (error.response && error.response.data.error.includes('deleted')) {
 
-              setErrorMessage(
-                `Information of person ${nameExists.name} has already been deleted from server`
-              );
-              setPersons(persons.filter((p) => p.id !== nameExists.id));
-            } else {
+            setErrorMessage(`Error: ${error.response.data.error}`);
 
-              setErrorMessage(`Error: ${error.response.data.error}`);
-            }
 
             setTimeout(() => {
               setErrorMessage(null);
             }, 5000);
+
             setNewName("");
             setNewNumber("");
           });
