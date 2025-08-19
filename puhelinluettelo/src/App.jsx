@@ -126,7 +126,14 @@ const App = () => {
 
         setNewName("");
         setNewNumber("");
-      });
+      })
+        .catch(error => {
+          console.log(error.response.data);
+          setMessage(`Error: ${error.response.data.error}`);
+          setTimeout(() => {
+            setMessage(null);
+          }, 5000);
+        })
     }
   };
 
