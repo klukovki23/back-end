@@ -30,6 +30,8 @@ let persons =
 
 app.use(express.json())
 
+app.use(express.static('dist'))
+
 
 
 
@@ -117,7 +119,7 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 app.use(errorHandler)
-app.use(express.static('dist'))
+
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
