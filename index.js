@@ -10,8 +10,6 @@ app.use(express.json())
 app.use(express.static('dist'))
 
 
-
-
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)

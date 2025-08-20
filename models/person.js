@@ -31,7 +31,7 @@ const personSchema = new mongoose.Schema({
       validator: function (v) {
         return /^\d{2,3}-\d+$/.test(v)
       },
-      message: `Not valid phone number! Format must be XX-XXXX... or XXX-XXXX...`
+      message: 'Not valid phone number! Format must be XX-XXXX... or XXX-XXXX...'
     }
   }
 })
