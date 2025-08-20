@@ -4,29 +4,6 @@ const Person = require('./models/person')
 
 const app = express()
 
-let persons =
-  [
-    {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": "1"
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": "2"
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": "3"
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": "4"
-    }
-  ]
 
 app.use(express.json())
 
@@ -35,23 +12,23 @@ app.use(express.static('dist'))
 
 
 
-app.get("/api/persons", (request, response) => {
+app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)
   })
 })
 
-app.get("/info", (request, response) => {
+app.get('/info', (request, response) => {
   const currentTime = new Date()
   Person.countDocuments({}).then(count => {
     response.send(`
       <p>Phonebook has info for ${count} people</p>
       <p>${currentTime}</p>
-  `);
-  });
+  `)
+  })
 })
 
-app.get("/api/persons/:id", (request, response, next) => {
+app.get('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id).then(person => {
     if (person) {
       response.json(person)
@@ -84,7 +61,7 @@ app.post('/api/persons', (request, response, next) => {
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
-  const { name, number } = request.body;
+  const { name, number } = request.body
 
   Person.findByIdAndUpdate(
     request.params.id,
@@ -93,13 +70,13 @@ app.put('/api/persons/:id', (request, response, next) => {
   )
     .then(updatedPerson => {
       if (updatedPerson) {
-        response.json(updatedPerson);
+        response.json(updatedPerson)
       } else {
-        response.status(404).send({ error: 'Person not found' });
+        response.status(404).send({ error: 'Person not found' })
       }
     })
-    .catch(error => next(error));
-});
+    .catch(error => next(error))
+})
 
 
 const unknownEndpoint = (request, response) => {
